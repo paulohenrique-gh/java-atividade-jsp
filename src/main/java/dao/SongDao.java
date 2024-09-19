@@ -3,10 +3,7 @@ package dao;
 import db.DbConnect;
 import model.Song;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +17,10 @@ public class SongDao {
 
     public void addSong(Song song) {
         try {
-            String sql = "INSERT INTO song(title, artistName, durationInSeconds, genre), VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO song(title, artistName, genre), VALUES (?, ?, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(sql);
             pst.setString(1, song.getTitle());
             pst.setString(2, song.getArtistName());
-            pst.setInt(3, song.getDurationInSeconds());
             pst.setString(4, song.getGenre());
 
             pst.executeUpdate();
@@ -38,6 +34,16 @@ public class SongDao {
 
         try {
             Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM song");
+
+            while (rs.next()) {
+                Song song = new Song();
+
+                song.setId(rs.getInt("id"));
+                song.setTitle(rs.getString("title"));
+                song.setArtistName(rs.getString("artistName"));
+                song.setGenre(rs.getString("genre"));
+            }
         } catch (SQLException e) {
             System.out.println("Error while getting all songs: " + e.getMessage());
         }
