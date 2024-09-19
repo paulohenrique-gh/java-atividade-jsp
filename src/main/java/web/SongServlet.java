@@ -9,14 +9,12 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/hello")
+@WebServlet("/songs")
 public class SongServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String message = "Essa é uma mensagem do SongServlet";
-        RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
-        req.setAttribute("message", message);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("songs.jsp");
         dispatcher.forward(req, resp);
     }
 
