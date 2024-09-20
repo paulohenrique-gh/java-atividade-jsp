@@ -27,7 +27,6 @@
         out.println("</p>");
     }
     %>
-
     <form class="flex flex-col gap-4 items-stretch w-2/4 mb-8 m-auto" action="/songs" method="post">
         <div>
             <input type="text" placeholder="Title of the song" id="title" name="title"
