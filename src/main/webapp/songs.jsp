@@ -63,8 +63,13 @@
                     out.println("<td>" + song.getTitle() + "</td>");
                     out.println("<td>" + song.getArtistName() + "</td>");
                     out.println("<td>" + song.getGenre() + "</td>");
-                    out.println("<td><a href=\"?songId=" + song.getId() + "\">Edit</a></td>");
-                    out.println("<td><a href=\"#\">Delete</a></td>");
+                    out.println("<td class=\"flex justify-end\"><a href=\"?songId=" + song.getId() + "\" class=\"btn btn-sm btn-accent\">Edit</a></td>");
+                    out.println("<td>");
+                    out.println("<form class=\"mb-0 flex justify-end\" action=\"songs/delete\" method=\"post\">");
+                    out.println("<input type=\"hidden\" id=\"songId\" name=\"songId\" value=\"" + song.getId() + "\">");
+                    out.println("<input type=\"submit\" value=\"Delete\" class=\"btn btn-sm btn-error\">");
+                    out.println("</form>");
+                    out.println("</td>");
                     out.println("</tr>");
                 }
             %>
