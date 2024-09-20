@@ -91,4 +91,16 @@ public class SongDao {
             System.out.println("Error while updating song: " + e.getMessage());
         }
     }
+
+    public void deleteSong(int songId) {
+        try {
+            String sql = "DELETE FROM song WHERE id = ?";
+            PreparedStatement pst = this.connection.prepareStatement(sql);
+            pst.setInt(1, songId);
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error while deleting song: " + e.getMessage());
+        }
+    }
 }
