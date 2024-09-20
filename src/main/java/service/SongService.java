@@ -7,14 +7,14 @@ import java.util.List;
 
 public class SongService {
 
-    private SongDao songDao;
+    private final SongDao songDao;
 
     public SongService() {
         this.songDao = new SongDao();
     }
 
     public void addSong(Song song) {
-        this.validateInput(song);
+        this.validateFields(song);
 
         this.songDao.addSong(song);
     }
@@ -28,12 +28,16 @@ public class SongService {
     }
 
     public void updateSong(Song song) {
-        this.validateInput(song);
+        this.validateFields(song);
 
         this.songDao.updateSong(song);
     }
 
-    private void validateInput(Song song) {
+    public void deleteSong(int songId) {
+        this.songDao.deleteSong(songId);
+    }
+
+    private void validateFields(Song song) {
         String title = song.getTitle();
         String artistName = song.getArtistName();
         String genre = song.getGenre();
