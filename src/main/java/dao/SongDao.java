@@ -33,8 +33,8 @@ public class SongDao {
         List<Song> songs = new ArrayList<>();
 
         try {
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM song");
+            Statement pst = connection.createStatement();
+            ResultSet rs = pst.executeQuery("SELECT * FROM song");
 
             while (rs.next()) {
                 Song song = new Song();
@@ -51,5 +51,44 @@ public class SongDao {
         }
 
         return songs;
+    }
+
+    public Song getSongById(int id) {
+        String sql = "SELECT * FROM song WHERE id = ?";
+        Song song = null;
+
+        try {
+            PreparedStatement pst = connection.prepareStatement(sql);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                song = new Song();
+                song.setId(rs.getInt("id"));
+                song.setTitle(rs.getString("title"));
+                song.setArtistName(rs.getString("artist_name"));
+                song.setGenre(rs.getString("genre"));
+
+                return song;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error while getting song by id: " + e.getMessage());
+        }
+
+        return song;
+    }
+
+    public void updateSong(Song song) {
+        try {
+            String sql = "UPDATE song SET title = ?, artist_name = ?, genre = ? WHERE id = ?";
+            PreparedStatement pst = this.connection.prepareStatement(sql);
+            pst.setString(1, song.getTitle());
+            pst.setString(2, song.getArtistName());
+            pst.setString(3, song.getGenre());
+            pst.setInt(4, song.getId());
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error while updating song: " + e.getMessage());
+        }
     }
 }
