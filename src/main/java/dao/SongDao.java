@@ -17,11 +17,11 @@ public class SongDao {
 
     public void addSong(Song song) {
         try {
-            String sql = "INSERT INTO song(title, artistName, genre), VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO song(title, artist_name, genre) VALUES (?, ?, ?)";
             PreparedStatement pst = connection.prepareStatement(sql);
             pst.setString(1, song.getTitle());
             pst.setString(2, song.getArtistName());
-            pst.setString(4, song.getGenre());
+            pst.setString(3, song.getGenre());
 
             pst.executeUpdate();
         } catch (SQLException ex) {
@@ -41,8 +41,10 @@ public class SongDao {
 
                 song.setId(rs.getInt("id"));
                 song.setTitle(rs.getString("title"));
-                song.setArtistName(rs.getString("artistName"));
+                song.setArtistName(rs.getString("artist_name"));
                 song.setGenre(rs.getString("genre"));
+
+                songs.add(song);
             }
         } catch (SQLException e) {
             System.out.println("Error while getting all songs: " + e.getMessage());
