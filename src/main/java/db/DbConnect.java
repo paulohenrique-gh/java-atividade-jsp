@@ -13,7 +13,7 @@ public class DbConnect {
             Class.forName("org.postgresql.Driver");
 
             String url = "jdbc:postgresql://localhost:5432/songs";
-            String user = "admin";
+            String user = "postgres";
             String password = "admin";
             connection = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException e) {
