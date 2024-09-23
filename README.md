@@ -1,11 +1,12 @@
 # JSP Songs
 
-Projeto em Java feito no bootcamp T-Academy, utilizando servlets, JSP, JDBC e Postgresql.
+Projeto em Java feito no bootcamp T-Academy.
 O usuário pode executar as operações de CRUD para salvar, ler, atualizar e excluir músicas do banco de dados.
 
 ## Tecnologias utilizadas
 
 - Servlet API
+- Tomcat
 - JSP
 - JDBC
 - Postgres
